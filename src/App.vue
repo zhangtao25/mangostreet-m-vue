@@ -1,74 +1,82 @@
 <template>
-  <div class="md-example-child md-example-child-tab-picker md-example-child-tab-picker-0">
-    <md-field title="地址">
-      <md-field-item
-        title="联系地址"
-        arrow="arrow-right"
-        @click="show = !show"
-        placeholder="请选择联系地址"
-        :content="addressStr"
-        solid
-      />
-    </md-field>
-    <md-tab-picker
-      title="请选择"
-      describe="请选择您所在的省份、城市、区县"
-      large-radius
-      :data="data"
-      v-model="show"
-      @change="handleChange"
-    />
-    <div class="test">
-      <img src="./assets/images/add.png" alt="">
-    </div>
+  <div>
+    <router-view/>
+    <app-tab-bar></app-tab-bar>
   </div>
 </template>
 
 <script>
-  import {Field, FieldItem, TabPicker} from 'mand-mobile'
-  import data from 'mand-mobile/components/tab-picker/demo/data'
-
+  import AppTabBar from './layouts/app-tab-bar'
   export default {
-    name: 'tab-bar-demo',
     components: {
-      [Field.name]: Field,
-      [FieldItem.name]: FieldItem,
-      [TabPicker.name]: TabPicker,
+      [AppTabBar.name]: AppTabBar
     },
     data() {
       return {
-        show: false,
-        address: [],
-        data: data,
       }
-    },
-    computed: {
-      addressStr() {
-        return this.address.map(item => item.label).join(' ')
-      },
-    },
-    methods: {
-      handleChange({options}) {
-        this.address = options
-      },
-    },
+    }
   }
 
 </script>
 
 <style lang="stylus">
-@import '~mand-mobile/components/_style/global.styl'
+  @import '~mand-mobile/components/_style/global.styl'
+  html
+    font-size calc(10000vw / 750)
+  body
+    font-size 28px
+    color #333
 </style>
-<style>
-  html{
-    font-size:calc(10000vw / 750);
-  }
-  body{
-    font-size: 28px;
-  }
-</style>
+
 <style lang="scss">
-  .test{
-    width: 100px;
+  .transition {
+    height: 100%;
+    transition: transform 0.7s cubic-bezier(0.55, 0, 0.1, 1);
+  }
+  .fixed {
+    position: fixed;
+    width: 100%;
+    top: 0;
+    overflow: hidden;
+  }
+  .slide-in-leave-to {
+    @extend .fixed;
+    transform: translate3d(-100%, 0, 0);
+  }
+  .slide-in-leave-active {
+    @extend .fixed;
+    @extend .transition;
+  }
+  .slide-in-enter {
+    @extend .fixed;
+    transform: translate3d(100%, 0, 0);
+  }
+  .slide-in-enter-active {
+    @extend .fixed;
+    @extend .transition;
+  }
+  .slide-in-enter-to {
+    @extend .fixed;
+    transform: translate3d(0, 0, 0);
+  }
+
+  .slide-out-leave-to {
+    @extend .fixed;
+    transform: translate3d(100%, 0, 0);
+  }
+  .slide-out-leave-active {
+    @extend .transition;
+    @extend .fixed;
+  }
+  .slide-out-enter {
+    @extend .fixed;
+    transform: translate3d(-100%, 0, 0);
+  }
+  .slide-out-enter-active {
+    @extend .transition;
+    @extend .fixed;
+  }
+  .slide-out-enter-to {
+    transform: translate3d(0, 0, 0);
   }
 </style>
