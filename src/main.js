@@ -4,6 +4,8 @@ import router from './router'
 import store from './store'
 import pikaqiu from './common/pikachu'
 
+import './assets/css/iconfont.css'
+
 
 // Handle before route, need check auth information.
 router.beforeEach((to, from, next) => {

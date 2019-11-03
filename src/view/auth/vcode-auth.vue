@@ -20,8 +20,7 @@
           ></md-input-item>
           <md-input-item
             title="验证码"
-            type="password"
-            v-model="password"
+            v-model="vcode"
             placeholder="请输入验证码"
           ></md-input-item>
         </md-field>
@@ -29,7 +28,7 @@
 
       <div class="row">
         <p>登录注册代表同意<span>用户协议、隐私政策</span></p>
-        <md-button type="warning" size="small" round>登录</md-button>
+        <md-button type="warning" size="small" round @click="onClickLogin">登录</md-button>
       </div>
 
       <div class="row">
@@ -48,6 +47,7 @@
 <script>
   import { Icon,InputItem,Field,Button } from 'mand-mobile'
   import userAgreementPrivacyPolicy from './user-agreement-privacy-policy'
+  import AuthService from './../../service/auth'
   export default {
     components:{
       [Icon.name]: Icon,
@@ -59,12 +59,20 @@
     data(){
       return{
         phone: '',
-        password:''
+        vcode:''
       }
     },
     methods: {
       goTo(path){
         this.$router.push({path})
+      },
+      onClickLogin(){
+        console.log(this.phone,this.vcode)
+        AuthService.login().then(res=>{
+          console.log(res)
+
+          this.goTo('/home')
+        })
       }
     },
   }

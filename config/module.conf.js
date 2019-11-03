@@ -19,7 +19,7 @@ const moduleConf = {
       ]
     },
     {
-      test: /\.(jpg|png|svg|gif)$/,
+      test: /\.(jpg|png|svg|gif|jpeg)$/,
       use: [
         'file-loader'
       ]
