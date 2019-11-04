@@ -6,10 +6,10 @@ module.exports = function (api) {
   const plugins = [
     '@babel/plugin-transform-arrow-functions',
     '@babel/plugin-transform-runtime',
-    ["import", {
-      "libraryName": "mand-mobile",
-      "libraryDirectory": "components"
-    }]
+    // ["import", {
+    //   "libraryName": "mand-mobile",
+    //   "libraryDirectory": "components"
+    // }]
   ];
   return {
     presets,

@@ -46,14 +46,9 @@
   </div>
 </template>
 <script>
-  import { Icon,InputItem,Field,Button } from 'mand-mobile'
   import userAgreementPrivacyPolicy from './user-agreement-privacy-policy'
   export default {
     components:{
-      [Icon.name]: Icon,
-      [InputItem.name]: InputItem,
-      [Field.name]: Field,
-      [Button.name]: Button,
       'user-agreement-privacy-policy': userAgreementPrivacyPolicy
     },
     data(){

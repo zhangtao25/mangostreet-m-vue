@@ -2,10 +2,18 @@ import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
 import store from './store'
+import axios from 'axios'
+
+import mandMobile from 'mand-mobile'
+import 'mand-mobile/lib/mand-mobile.css'
+
+Vue.use(mandMobile)
 
 
 import pikaqiu from './common/pikachu'
 import './assets/css/iconfont.css'
+
+
 
 
 // 路由守卫

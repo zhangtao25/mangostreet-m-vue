@@ -27,15 +27,11 @@
 </template>
 
 <script>
-  import {TabBar, Swiper, SwiperItem} from 'mand-mobile'
   import Follow from './home/follow'
 
   export default {
     name: 'tab-bar-demo',
     components: {
-      [TabBar.name]: TabBar,
-      [Swiper.name]: Swiper,
-      [SwiperItem.name]: SwiperItem,
       'follow': Follow
     },
     data() {

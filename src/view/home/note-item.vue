@@ -15,10 +15,8 @@
   </div>
 </template>
 <script>
-  import {Icon} from 'mand-mobile'
   export default {
     components:{
-      [Icon.name]: Icon,
     },
     props:['noteData'],
     mounted() {
