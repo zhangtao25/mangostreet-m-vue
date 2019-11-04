@@ -2,19 +2,20 @@ import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
 import store from './store'
-import pikaqiu from './common/pikachu'
 
+
+import pikaqiu from './common/pikachu'
 import './assets/css/iconfont.css'
 
 
-// Handle before route, need check auth information.
+// 路由守卫
 router.beforeEach((to, from, next) => {
   next();
 });
 
 
 pikaqiu();
-require('./mock');
+// require('./mock');
 
 
 new Vue({
