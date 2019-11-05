@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="follow">
     <div class="wrap">
       <note-item v-for="(item,index) of noteData" :note-data="item" :key="index"></note-item>
     </div>
@@ -30,19 +30,20 @@
 
 </script>
 <style lang="scss">
-  .wrap{
-    column-count: 2;
-    column-gap: 10px;
-    width: 100%;
-    background-color: #fafafa;
-    padding: 0 10px;
-    box-sizing: border-box;
-    .note-item{
-      break-inside:avoid;
-      background-color: white;
-      border-radius: 10px;
-      overflow: hidden;
+  .follow{
+    .wrap{
+      column-count: 2;
+      column-gap: 10px;
+      width: 100%;
+      background-color: #fafafa;
+      padding: 0 10px;
+      box-sizing: border-box;
+      .note-item{
+        break-inside:avoid;
+        background-color: white;
+        border-radius: 10px;
+        overflow: hidden;
+      }
     }
   }
-
 </style>

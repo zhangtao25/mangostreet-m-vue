@@ -1,6 +1,8 @@
 <template>
   <div>
-    <router-view/>
+    <transition name="slide-in">
+      <router-view/>
+    </transition>
     <app-tab-bar></app-tab-bar>
   </div>
 </template>

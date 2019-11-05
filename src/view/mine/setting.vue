@@ -1,20 +1,20 @@
 <template>
   <div class="setting">
     <header-nav-bar>
-      <md-icon class="l" name="arrow-left" @click="goTo('/mine')"/>
+      <md-icon class="l" name="areaow-left" @click="goTo('/mine')"/>
       <span>编辑资料</span>
-      <md-icon class="r" name="arrow-left"/>
+      <md-icon class="r" name="areaow-left"/>
     </header-nav-bar>
 
     <div class="md-example-child">
       <md-field>
-        <md-cell-item title="修改名字" addon="张涛" arrow @click="goTo('/setting/edit/nickname')" />
-        <md-cell-item title="小红书号" addon="905019230" arrow />
-        <md-cell-item title="性别" :addon="selectorValue" arrow @click="showSelector"/>
-        <md-cell-item title="常住地" :addon="addressStr" arrow @click="show = !show"/>
-        <md-cell-item title="学校" addon="淮南师范学院" arrow />
-        <md-cell-item title="生日" addon="1995-10-24" arrow />
-        <md-cell-item title="个性签名" addon="今天又是充满希望的一天" arrow />
+        <md-cell-item title="修改名字" addon="张涛" areaow @click="goTo('/setting/edit/nickname')" />
+        <md-cell-item title="小红书号" addon="905019230" areaow />
+        <md-cell-item title="性别" :addon="selectorValue" areaow @click="showSelector"/>
+        <md-cell-item title="常住地" :addon="addressStr" areaow @click="show = !show"/>
+        <md-cell-item title="学校" addon="淮南师范学院" areaow />
+        <md-cell-item title="生日" addon="1995-10-24" areaow />
+        <md-cell-item title="个性签名" addon="今天又是充满希望的一天" areaow />
       </md-field>
 
       <md-selector
@@ -43,9 +43,8 @@
 </template>
 <script>
   import HeaderNavBar from './../../components/header-nav-bar'
-  // import data1 from 'mand-mobile/components/tab-picker/demo/data'
-  import data1 from './../../assets/data/test'
-  import axios from 'axios'
+  import areaData from './../../assets/data/area'
+  import Util from './../../common/util'
 
 
   export default {
@@ -70,14 +69,12 @@
             },
           ],
         ],
-        data1:data1,
+        data1:[],
         selectorValue: '男',
       }
     },
     mounted(){
-      axios.get('/api').then(res=>{
-        console.log(res.data.data.china.byProvince)
-      })
+      this.data1 = Util.formatAreaData(areaData);
     },
     computed: {
       addressStr() {
@@ -95,6 +92,7 @@
         this.selectorValue = text
       },
       handleChange({options}) {
+        console.log(options)
         this.address = options
       },
     }

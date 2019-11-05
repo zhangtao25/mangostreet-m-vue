@@ -1,28 +1,13 @@
 import Vue from 'vue'
 import Router from 'vue-router'
+import authRouterConfig from './auth.router.config'
+import settingRouterConfig from './setting.router.config'
 
-Vue.use(Router)
+Vue.use(Router);
 
 export default new Router({
   routes: [
-    {
-      path: '/auth',
-      component: ()=>import('../view/auth.vue'),
-      children:[
-        {
-          path: 'w',
-          component: ()=>import('../view/auth/welcome.vue'),
-        },
-        {
-          path: 'v',
-          component: ()=>import('../view/auth/vcode-auth.vue'),
-        },
-        {
-          path: 'p',
-          component: ()=>import('../view/auth/password-auth.vue'),
-        }
-      ]
-    },
+    ...authRouterConfig,
     {
       path: '/home',
       component: ()=>import('../view/home.vue')
@@ -39,13 +24,6 @@ export default new Router({
       path: '/mine',
       component: ()=>import('../view/mine.vue')
     },
-    {
-      path: '/setting',
-      component: ()=>import('../view/mine/setting.vue')
-    },
-    {
-      path: '/setting/edit/nickname',
-      component: ()=>import('../view/mine/edit-user-nickname.vue')
-    },
+    ...settingRouterConfig
   ]
 })
