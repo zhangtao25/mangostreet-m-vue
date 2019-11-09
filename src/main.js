@@ -20,7 +20,7 @@ router.beforeEach((to, from, next) => {
 
 
 pikaqiu();
-require('./mock');
+// require('./mock');
 
 
 new Vue({

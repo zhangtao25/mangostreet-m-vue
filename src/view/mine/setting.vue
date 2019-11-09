@@ -1,26 +1,26 @@
 <template>
   <div class="setting">
     <header-nav-bar>
-      <md-icon class="l" name="areaow-left" @click="goTo('/mine')"/>
+      <md-icon class="l" name="arrow-left" @click="goTo('/mine')"/>
       <span>编辑资料</span>
-      <md-icon class="r" name="areaow-left"/>
+      <md-icon class="r" name="arrow-left"/>
     </header-nav-bar>
 
     <div class="md-example-child">
       <md-field>
-        <md-cell-item title="修改名字" addon="张涛" areaow @click="goTo('/setting/edit/nickname')" />
-        <md-cell-item title="小红书号" addon="905019230" areaow />
-        <md-cell-item title="性别" :addon="selectorValue" areaow @click="showSelector"/>
-        <md-cell-item title="常住地" :addon="addressStr" areaow @click="show = !show"/>
-        <md-cell-item title="学校" addon="淮南师范学院" areaow />
-        <md-cell-item title="生日" addon="1995-10-24" areaow />
-        <md-cell-item title="个性签名" addon="今天又是充满希望的一天" areaow />
+        <md-cell-item title="修改名字" addon="张涛" arrow @click="goTo('/setting/edit/nickname')" />
+        <md-cell-item title="小红书号" addon="905019230" arrow />
+        <md-cell-item title="性别" :addon="selectorValue" arrow @click="showSelector"/>
+        <md-cell-item title="常住地" :addon="addressStr" arrow @click="show = !show"/>
+        <md-cell-item title="学校" addon="淮南师范学院" arrow />
+        <md-cell-item title="生日" addon="1995-10-24" arrow />
+        <md-cell-item title="个性签名" addon="今天又是充满希望的一天" arrow />
       </md-field>
 
       <md-selector
         v-model="isSelectorShow"
         default-value="1"
-        :data="data[0]"
+        :data="data0"
         max-height="320px"
         title="选择性别"
         large-radius
@@ -45,6 +45,7 @@
   import HeaderNavBar from './../../components/header-nav-bar'
   import areaData from './../../assets/data/area'
   import Util from './../../common/util'
+  import data from 'mand-mobile/components/tab-picker/demo/data'
 
 
   export default {
@@ -57,19 +58,17 @@
         isSelectorShow: false,
         show:false,
         address:[],
-        data: [
-          [
-            {
-              value: '1',
-              text: '男',
-            },
-            {
-              value: '2',
-              text: '女',
-            },
-          ],
+        data0: [
+          {
+            value: '1',
+            text: '男',
+          },
+          {
+            value: '2',
+            text: '女',
+          },
         ],
-        data1:[],
+        data1:{},
         selectorValue: '男',
       }
     },

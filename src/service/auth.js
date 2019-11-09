@@ -1,13 +1,28 @@
 import axios from 'axios'
 
-function login() {
+function authUsersByVerificationCode(phone, vcode) {
   return new Promise((resolve, reject) => {
-    axios.post('/api/login',{}).then(res => {
+    let postData = {
+      'username': phone,
+      'vcode': vcode
+    };
+    axios.post('/api/users/v',postData).then(res => {
       resolve(res)
     })
   })
 }
 
+function authUsersByPasswordCode() {
+  return new Promise((resolve, reject) => {
+    axios.post('/api/users/p',{}).then(res => {
+      resolve(res)
+    })
+  })
+}
+
+
+
 export default {
-  login
+  authUsersByVerificationCode,
+  authUsersByPasswordCode
 }

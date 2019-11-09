@@ -63,10 +63,10 @@
       },
       onClickLogin(){
         console.log(this.phone,this.vcode)
-        AuthService.login().then(res=>{
+        AuthService.authUsersByVerificationCode(this.phone, this.vcode).then(res=>{
           console.log(res)
 
-          this.goTo('/home')
+          // this.goTo('/home')
         })
       }
     },
