@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <style>
+    </style>
+    <title>Document</title>
+</head>
+<body>
+    <canvas id="canvas" width="256" height="256"></canvas>
+</body>
+<script>
+    var canvas = document.getElementById('canvas')
+    var context = canvas.getContext('2d')
+
+    context.fillStyle="#fd2741";
+    context.fillRect(0,0,256,256);
+
+    context.font = "64px bold 黑体";
+// 设置颜色
+context.fillStyle = "#fff";
+// 设置水平对齐方式
+context.textAlign = "center";
+// 设置垂直对齐方式
+context.textBaseline = "middle";
+// 绘制文字（参数：要写的字，x坐标，y坐标）
+context.fillText("芒果街", 128, 128);
+</script>
+</html>
