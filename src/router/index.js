@@ -17,6 +17,10 @@ export default new Router({
       component: ()=>import('../view/mall.vue')
     },
     {
+      path: '/add',
+      component: ()=>import('../view/add.vue')
+    },
+    {
       path: '/msg',
       component: ()=>import('../view/msg.vue')
     },

@@ -4,6 +4,7 @@
       <router-view/>
     </transition>
     <app-tab-bar></app-tab-bar>
+<!--    <div id="container"></div>-->
   </div>
 </template>
 
@@ -16,10 +17,20 @@
     data() {
       return {
       }
+    },
+    mounted() {
+
+
     }
   }
 
 </script>
+<style>
+  html,body,#container{
+    height:100vh;
+    width: 100%;
+  }
+</style>
 
 <style lang="stylus">
   @import '~mand-mobile/components/_style/global.styl'
