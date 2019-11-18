@@ -50,8 +50,6 @@
       return {
         imageList: {
           reader0: [
-            '//img-hxy021.didistatic.com/static/strategymis/insurancePlatform_spu/uploads/27fb7f097ca218d743f816836bc7ea4a',
-            '//manhattan.didistatic.com/static/manhattan/insurancePlatform_spu/uploads/c2912793a222eb24b606a582fd849ab7',
           ]
         },
         amount:9

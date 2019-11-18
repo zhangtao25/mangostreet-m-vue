@@ -155,7 +155,7 @@
       span:nth-child(2) {
         color: white;
         width: 115px;
-        background-color: #57be6a;
+        background-color: #ff5257;
       }
     }
     .row:nth-child(3){
@@ -166,7 +166,7 @@
 
       .selected{
         .icon, p{
-          color: #57be6a;
+          color: #ff5257;
         }
       }
       padding: 0 70px;
