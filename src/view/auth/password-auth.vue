@@ -14,7 +14,6 @@
         <md-field>
           <md-input-item
             title="手机号"
-            type="phone"
             v-model="phone"
             placeholder="请输入手机号码"
           ></md-input-item>
@@ -29,7 +28,7 @@
 
       <div class="row">
         <p>登录注册代表同意<span>用户协议、隐私政策</span></p>
-        <md-button type="warning" size="small" round>登录</md-button>
+        <md-button type="warning" size="small" round @click="login">登录</md-button>
       </div>
 
       <div class="row">
@@ -47,6 +46,7 @@
 </template>
 <script>
   import userAgreementPrivacyPolicy from './user-agreement-privacy-policy'
+  import AuthService from './../../service/auth'
   export default {
     components:{
       'user-agreement-privacy-policy': userAgreementPrivacyPolicy
@@ -60,6 +60,19 @@
     methods: {
       goTo(path){
         this.$router.push({path})
+      },
+      login(){
+        // username = this.Ctx.PostValueTrim("username")
+        // password = this.Ctx.PostValueTrim("password")
+        // ref      = this.Ctx.FormValue("ref")
+        let postData = {
+          username:this.phone,
+          password:this.password,
+          ref:"testref"
+        }
+        AuthService.authUsersByPasswordCode(postData).then(res=>{
+          console.log(res)
+        })
       }
     },
   }

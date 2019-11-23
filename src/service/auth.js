@@ -1,5 +1,7 @@
 import axios from 'axios'
 
+axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
+
 function authUsersByVerificationCode(phone, vcode) {
   return new Promise((resolve, reject) => {
     let postData = {
@@ -12,9 +14,14 @@ function authUsersByVerificationCode(phone, vcode) {
   })
 }
 
-function authUsersByPasswordCode() {
+
+
+function authUsersByPasswordCode(postData) {
   return new Promise((resolve, reject) => {
-    axios.post('/api/users/p',{}).then(res => {
+    let fd = new FormData()
+    fd.append("username",postData.username)
+    fd.append("password",postData.password)
+    axios.post('/api/login/signin',fd).then(res => {
       resolve(res)
     })
   })

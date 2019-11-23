@@ -61,7 +61,7 @@ module.exports = {
       "/api": {
         "target": `http://${myHost}:${port}`,
         "changeOrigin": true,
-        "pathRewrite": {"^/api": "/"}
+        "pathRewrite": {"^/api": "/api"}
       }
     }
   },
