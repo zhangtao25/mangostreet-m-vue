@@ -6,7 +6,7 @@
         v-for="(img, index) in imageList['reader0']"
         :key="index"
         :style="{
-          'backgroundImage': `url(${img})`,
+          'backgroundImage': `url(http://mangostreet.top:8001/note/${img})`,
         }">
         <md-tag
           class="image-reader-item-del"
@@ -38,6 +38,7 @@
 
 <script>
   import {Icon, ImageReader, Tag, Toast} from 'mand-mobile'
+  import NoteService from './../../service/note'
 
   export default {
     name: 'image-reader-demo',
@@ -59,17 +60,16 @@
       onReaderSelect(name, {files}) {
         files.forEach(file => {
           console.log('[Mand Mobile] ImageReader Selected:', 'File Name ' + file.name)
+          NoteService.upload(file).then(res=>{
+            // this.$set(this.imageList, name, demoImageList)
+            this.imageList.reader0.push(res.data.urls)
+            this.$emit("giveData",this.imageList.reader0)
+          })
         })
         Toast.loading('图片读取中...')
       },
-      onReaderComplete(name, {dataUrl, file}) {
+      onReaderComplete(name, obj) {
         Toast.hide()
-        console.log('[Mand Mobile] ImageReader Complete:', 'File Name ' + file.name)
-        setTimeout(() => {
-          const demoImageList = this.imageList[name] || []
-          demoImageList.push(dataUrl)
-          this.$set(this.imageList, name, demoImageList)
-        }, 100)
       },
       onReaderError(name, err) {
         console.log(err)
@@ -78,9 +78,8 @@
         }
       },
       onDeleteImage(name, index) {
-        const demoImageList = this.imageList[name] || []
-        demoImageList.splice(index, 1)
-        this.$set(this.imageList, name, demoImageList)
+        this.imageList.reader0.splice(index, 1)
+        this.$emit("giveData",this.imageList.reader0)
       },
     },
   }

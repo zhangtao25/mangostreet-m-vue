@@ -19,7 +19,7 @@ router.beforeEach((to, from, next) => {
 });
 
 
-pikaqiu();
+// pikaqiu();
 // require('./mock');
 
 

@@ -4,8 +4,10 @@
       <span @click="goTo('/home')">取消</span>
       <span @click="onSubmit">确定</span>
     </div>
-
     <div class="row">
+      <md-field>
+        <md-input-item placeholder="请输入标题" v-model="title"></md-input-item>
+      </md-field>
       <md-field>
         <md-textarea-item
           ref="demo2"
@@ -27,12 +29,9 @@
         </md-textarea-item>
       </md-field>
     </div>
-
     <div class="row">
-      <image-reader ref="imageReader"></image-reader>
+      <image-reader ref="imageReader" @giveData="giveData"></image-reader>
     </div>
-
-
     <div class="row">
       <md-field>
         <md-cell-item :class="{'selected':(locateAddress !== null)}" :title="locateAddress===null?'所选地址':locateAddress" arrow @click="fn">
@@ -43,32 +42,32 @@
         </md-cell-item>
       </md-field>
     </div>
-
-
-
-
     <div class="location-selector" v-show="isShowLocationSelector">
       <iframe id="location-selector-iframe" :src="'https://m.amap.com/picker/?center='+currentLocation+'&key=b377f3b0be063e4ee2b2b8d40afae0d7'"></iframe>
     </div>
   </div>
 </template>
 <script>
-  import {TextareaItem, Field, Icon} from 'mand-mobile'
+  import {TextareaItem, Field, Icon ,InputItem} from 'mand-mobile'
   import imageReader from './add/image-reader'
+  import NoteService from './../service/note'
 
   export default {
     data() {
       return {
+        title:"",
         value: '',
         isShowLocationSelector:false,
         locateAddress:null,
-        currentLocation:"0,0"
+        currentLocation:"0,0",
+        images:""
       }
     },
     components: {
       [TextareaItem.name]: TextareaItem,
       [Field.name]: Field,
       [Icon.name]: Icon,
+      [InputItem.name]: InputItem,
       'image-reader':imageReader
     },
     methods:{
@@ -79,8 +78,18 @@
         this.$router.push({path})
       },
       onSubmit(){
-        console.log(this.value,this.$refs.imageReader.$data.imageList,this.locateAddress)
-        this.goTo("/home")
+        let postData = {
+          "title": this.title,
+          "content": this.value,
+          "contentType":"normal",
+          "images":this.images
+        }
+        NoteService.createNote(postData).then(res=>{
+          console.log(res)
+        })
+      },
+      giveData(val){
+        this.images = val.join(";")
       },
       initLocationSelector(){
         let _this = this
@@ -89,13 +98,10 @@
           iframe.postMessage('hello','https://m.amap.com/picker/');
         };
         window.addEventListener("message", function(e){
-          console.log(e.data,'您选择了:' + e.data.name + ',' + e.data.location)
-
           if (e.data.name && e.data.location){
             _this.locateAddress = e.data.name;
             _this.isShowLocationSelector = false
           }
-
         }, false);
         //获取用户所在城市信息
         function showCityInfo() {
@@ -107,11 +113,9 @@
               if (result && result.city && result.bounds) {
                 var cityinfo = result.city;
                 var citybounds = result.bounds;
-                console.log(cityinfo,citybounds.northeast.O,citybounds.southwest.O,citybounds.getCenter().M,citybounds.getCenter().O,11111)
                 _this.currentLocation = citybounds.getCenter().M + ',' +citybounds.getCenter().O
               }
             } else {
-              console.log(result,11111)
             }
           });
         }

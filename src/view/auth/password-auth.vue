@@ -72,6 +72,9 @@
         }
         AuthService.authUsersByPasswordCode(postData).then(res=>{
           console.log(res)
+          localStorage.setItem("token", res.data.token)
+          localStorage.setItem("userInfo", JSON.stringify(res.data.user))
+          this.goTo("/home")
         })
       }
     },
