@@ -85,8 +85,8 @@
               let canvas = document.createElement("canvas");
               let context = canvas.getContext("2d");
               let timestamp=new Date().getTime()
-              canvas.width = originWidth/10; //压缩后的宽度
-              canvas.height = originHeight/10;
+              canvas.width = 750; //压缩后的宽度
+              canvas.height = (originHeight/originWidth) *750;
               context.drawImage(img, 0, 0, canvas.width, canvas.height);
               heizi = me.dataURLtoFile(canvas.toDataURL("image/jpeg"),String(timestamp))
               resolve(heizi)
@@ -96,11 +96,8 @@
       },
       onReaderSelect(name, {files}) {
         files.forEach(file => {
-          console.log(file,1234)
-          this.beforeAvatarUpload(file).then((res)=>{
-            console.log('[Mand Mobile] ImageReader Selected:', 'File Name ' + file.name)
-            NoteService.upload(file).then(res=>{
-              // this.$set(this.imageList, name, demoImageList)
+          this.beforeAvatarUpload(file).then((compressedFile)=>{
+            NoteService.upload(compressedFile).then(res=>{
               this.imageList.reader0.push(res.data.urls)
               this.$emit("giveData",this.imageList.reader0)
             })
