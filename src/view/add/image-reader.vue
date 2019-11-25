@@ -57,13 +57,53 @@
       }
     },
     methods: {
+      // 将base64转换成file对象
+      dataURLtoFile (dataurl, filename = 'file') {
+        let arr = dataurl.split(',')
+        let mime = arr[0].match(/:(.*?);/)[1]
+        let suffix = mime.split('/')[1]
+        let bstr = atob(arr[1])
+        let n = bstr.length
+        let u8arr = new Uint8Array(n)
+        while (n--) {
+          u8arr[n] = bstr.charCodeAt(n)
+        }
+        return new File([u8arr], `${filename}.${suffix}`, {type: mime})
+      },
+      beforeAvatarUpload(file) {
+        return new Promise((resolve, reject)=>{
+          let me = this;
+          let reader = new FileReader();
+          let heizi = {}
+          reader.readAsDataURL(file);
+          reader.onload = function(e) {
+            let img = new Image();
+            img.src = this.result;
+            img.onload = function() {
+              let originWidth = img.width;
+              let originHeight = img.height;
+              let canvas = document.createElement("canvas");
+              let context = canvas.getContext("2d");
+              let timestamp=new Date().getTime()
+              canvas.width = originWidth/10; //压缩后的宽度
+              canvas.height = originHeight/10;
+              context.drawImage(img, 0, 0, canvas.width, canvas.height);
+              heizi = me.dataURLtoFile(canvas.toDataURL("image/jpeg"),String(timestamp))
+              resolve(heizi)
+            };
+          };
+        })
+      },
       onReaderSelect(name, {files}) {
         files.forEach(file => {
-          console.log('[Mand Mobile] ImageReader Selected:', 'File Name ' + file.name)
-          NoteService.upload(file).then(res=>{
-            // this.$set(this.imageList, name, demoImageList)
-            this.imageList.reader0.push(res.data.urls)
-            this.$emit("giveData",this.imageList.reader0)
+          console.log(file,1234)
+          this.beforeAvatarUpload(file).then((res)=>{
+            console.log('[Mand Mobile] ImageReader Selected:', 'File Name ' + file.name)
+            NoteService.upload(file).then(res=>{
+              // this.$set(this.imageList, name, demoImageList)
+              this.imageList.reader0.push(res.data.urls)
+              this.$emit("giveData",this.imageList.reader0)
+            })
           })
         })
         Toast.loading('图片读取中...')
