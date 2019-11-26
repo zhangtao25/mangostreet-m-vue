@@ -13,6 +13,10 @@ export default new Router({
       component: ()=>import('../view/home.vue')
     },
     {
+      path: '/note-detail',
+      component: ()=>import('../view/home/note-detail.vue')
+    },
+    {
       path: '/mall',
       component: ()=>import('../view/mall.vue')
     },
