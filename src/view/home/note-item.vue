@@ -1,5 +1,5 @@
 <template>
-  <div class="note-item">
+  <div class="note-item" @click="goTo('/note-detail')">
     <img :src="noteData.cover" alt="">
     <div class="title">{{noteData.title}}</div>
     <ul>
@@ -20,7 +20,12 @@
     },
     props:['noteData'],
     mounted() {
-    }
+    },
+    methods: {
+      goTo(path){
+        this.$router.push({path})
+      },
+    },
   }
 </script>
 
