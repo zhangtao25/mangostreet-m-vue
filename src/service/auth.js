@@ -1,4 +1,4 @@
-import axios from 'axios'
+import api from './api'
 
 function formatPostData(data) {
   let formData = new FormData();
@@ -14,7 +14,7 @@ function authUsersByVerificationCode(phone, vcode) {
       'username': phone,
       'vcode': vcode
     };
-    axios.post('/api/users/v',postData).then(res => {
+    api.post('/api/users/v',postData).then(res => {
       resolve(res)
     })
   })
@@ -24,7 +24,7 @@ function authUsersByVerificationCode(phone, vcode) {
 
 function authUsersByPasswordCode(postData) {
   return new Promise((resolve, reject) => {
-    axios.post('/api/login/signin',formatPostData(postData)).then(res => {
+    api.post('/api/login/signin',formatPostData(postData)).then(res => {
       resolve(res.data)
     })
   })

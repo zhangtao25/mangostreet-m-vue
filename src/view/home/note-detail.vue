@@ -8,10 +8,10 @@
         :is-prevent="false"
         :useNative-driver="false"
       >
-        <md-swiper-item :key="$index" v-for="(item, $index) in simple">
+        <md-swiper-item :key="$index" v-for="(item, $index) in images">
           <div
             class="banner-item"
-            :style="{'background': `${item.color}`}">{{item.text}}
+            :style="{'backgroundImage': `url(http://mangostreet.top:8001/note/${item})`}">{{item.text}}
           </div>
         </md-swiper-item>
       </md-swiper>
@@ -32,8 +32,8 @@
         </div>
 
         <div class="row">
-          <p class="title">一路向北</p>
-          <p class="note-content">后视镜里的世界 越来越远的道别 你转身向背 侧脸还是很美 我用眼光去追 竟听见你的泪 在车窗外面徘徊 是我错失的机会 你站的方位 跟我中间隔着泪 街景一直在后退 你的崩溃在窗外零碎 我一路向北 离开有你的季节 你说你好累 已无法再爱上谁 风在山路吹 过往的画面全都是我不对 细数惭愧 我伤你几回 后视镜里的世界 越来越远的道别 你转身向背 侧脸还是很美 我用眼光去追 竟听见你的泪 在车窗外面徘徊 是我错失的机会 你站的方位 跟我中间隔着泪 街景一直在后退 你的崩溃在窗外零碎 我一路向北 离开有你的季节 你说你好累 已无法再爱上谁 风在山路吹 过往的画面全都是我不对 细数惭愧 我伤你几回 我一路向北 离开有你的季节 方向盘周围 回转着我的后悔 我加速超越 却甩不掉...</p>
+          <p class="title">{{title}}</p>
+          <p class="note-content">{{content}}</p>
         </div>
       </div>
     </div>
@@ -43,6 +43,9 @@
 
   import {Swiper, SwiperItem} from 'mand-mobile'
   import simple from 'mand-mobile/components/swiper/demo/data/simple'
+  import NoteService from './../../service/note'
+
+  // import
 
   export default {
     name: 'swiper-demo',
@@ -53,14 +56,15 @@
     data() {
       return {
         simple,
+        title:"",
+        images:"",
+        content:""
       }
     },
     mounted() {
-// Simulation of asynchronous
       setTimeout(() => {
         this.simple = simple.concat(simple)
       }, 10000)
-// Simulation of asynchronous
       setTimeout(() => {
         this.simple = simple
       }, 24500)
@@ -73,6 +77,18 @@
       window.triggerSwiper2 = () => {
         this.stop()
       }
+
+      console.log(this.$route.params.id)
+
+      NoteService.getNoteById(this.$route.params.id).then(res=>{
+
+        this.title = res.data.title
+        this.content = res.data.content
+        this.images = res.data.images.split(";")
+        console.log(this.images)
+      })
+
+      // getNoteById
     },
     methods: {
       setValue(id, value) {
@@ -105,29 +121,34 @@
 
 
 <style lang="scss">
-  .note-detail{
-    .content{
+  .note-detail {
+    .content {
       padding: 0 48px;
     }
-    .row:nth-child(1){
+
+    .row:nth-child(1) {
       display: flex;
       justify-content: space-between;
       margin-top: 40px;
-      .left{
+
+      .left {
         display: flex;
         justify-content: center;
         align-items: center;
-        .avatar-img{
+
+        .avatar-img {
           width: 64px;
           border-radius: 50%;
         }
-        .user{
+
+        .user {
           font-size: 30px;
           font-weight: bolder;
           margin-left: 10px;
         }
       }
-      .right{
+
+      .right {
         display: flex;
         box-sizing: border-box;
         justify-content: center;
@@ -140,16 +161,19 @@
       }
     }
 
-    .row:nth-child(2){
+    .row:nth-child(2) {
       padding-top: 20px;
-      .title{
+
+      .title {
         font-size: 30px;
         font-weight: bolder;
       }
-      .note-content{
+
+      .note-content {
 
       }
-      p{
+
+      p {
         line-height: 2;
       }
     }
@@ -160,6 +184,7 @@
 <style lang="stylus">
   .md-example-child-swiper-0
     height 1050px
+
     .banner-item
       float left
       width 100%
@@ -173,4 +198,5 @@
       box-pack center
       justify-content center
       text-decoration-line none
+      background-size cover
 </style>

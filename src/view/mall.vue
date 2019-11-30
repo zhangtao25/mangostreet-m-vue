@@ -1,5 +1,5 @@
 <template>
   <div>
-    我是mall
+    mall页尚未开发！
   </div>
 </template>

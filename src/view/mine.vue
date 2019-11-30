@@ -3,7 +3,7 @@
     <div class="row">
       <i class="iconfont icon-list"></i>
       <p>
-        <span>请叫我张温柔</span>
+        <span>{{nickname}}</span>
         <span>小红书号：905019230</span>
       </p>
       <i class="iconfont icon-send"></i>
@@ -11,7 +11,9 @@
 
     <div class="row">
       <div class="l">
-        <img src="./../assets/images/touxiang.jpg" alt="">
+<!--        <img :src="avatar" alt="">-->
+        <div class="avatar" :style="{backgroundImage:`url(${avatar})`}"></div>
+        <input type="file"  @change="uploadAvatar">
       </div>
 
       <div class="r">
@@ -41,11 +43,42 @@
   </div>
 </template>
 <script>
+  import UserService from './../service/user'
   export default {
+    data(){
+      return{
+        nickname:"",
+        avatar:"",
+        userId:0
+      }
+    },
     methods:{
       goTo(path){
         this.$router.push({path})
       },
+      uploadAvatar(e){
+        // console.log(e.target.files[0])
+        UserService.uploadAvatar(e.target.files[0]).then(res=>{
+          console.log(res.data.urls)
+          this.avatar = "http://mangostreet.top:8001/user/" + res.data.urls
+
+          let data = {
+            avatar:this.avatar,
+            nickname:this.nickname
+          }
+          UserService.editUserById({id:this.userId,data:data}).then(ress=>{
+            console.log(ress)
+          })
+        })
+      }
+    },
+    mounted() {
+      UserService.getCurrent().then(res=>{
+        console.log(res.data.nickname)
+        this.nickname = res.data.nickname
+        this.avatar = res.data.avatar
+        this.userId = res.data.id
+      })
     }
   }
 </script>
@@ -78,9 +111,26 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        img{
+        position: relative;
+        /*img{*/
+        /*  width: 145px;*/
+        /*  border-radius: 50%;*/
+        /*  position: absolute;*/
+        /*  z-index: 1;*/
+        /*}*/
+        .avatar{
           width: 145px;
+          height: 145px;
           border-radius: 50%;
+          position: absolute;
+          z-index: 1;
+          background-size: cover;
+        }
+        input{
+          width: 145px;
+          position: absolute;
+          z-index: 2;
+          opacity: 0;
         }
       }
       .r{

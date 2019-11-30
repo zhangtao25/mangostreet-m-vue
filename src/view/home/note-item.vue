@@ -1,6 +1,6 @@
 <template>
-  <div class="note-item" @click="goTo('/note-detail')">
-    <img :src="noteData.cover" alt="">
+  <div class="note-item" @click="goTo(`/note-detail/${noteData.id}`)">
+    <img :src="'http://mangostreet.top:8001/note/'+cover" alt="">
     <div class="title">{{noteData.title}}</div>
     <ul>
       <li>
@@ -26,6 +26,12 @@
         this.$router.push({path})
       },
     },
+    computed:{
+      cover(){
+        let arr = this.noteData.images.split(";");
+        return arr[0]
+      }
+    }
   }
 </script>
 

@@ -98,6 +98,7 @@
         files.forEach(file => {
           this.beforeAvatarUpload(file).then((compressedFile)=>{
             NoteService.upload(compressedFile).then(res=>{
+              console.log(res)
               this.imageList.reader0.push(res.data.urls)
               this.$emit("giveData",this.imageList.reader0)
             })

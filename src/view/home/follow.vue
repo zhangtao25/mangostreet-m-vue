@@ -22,7 +22,7 @@
     mounted(){
       NoteService.getNote().then(res=>{
         // console.log(res,11111)
-        this.noteData = res
+        this.noteData = res.data
       })
     },
     methods: {
