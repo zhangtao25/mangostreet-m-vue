@@ -1,8 +1,9 @@
 <template>
   <div>
-    <transition name="slide-in">
-      <router-view/>
-    </transition>
+<!--    <transition name="slide-in">-->
+<!--      -->
+<!--    </transition>-->
+    <router-view/>
     <app-tab-bar></app-tab-bar>
 <!--    <div id="container"></div>-->
   </div>
@@ -19,8 +20,6 @@
       }
     },
     mounted() {
-
-
     }
   }
 

@@ -1,5 +1,6 @@
 const state = {
-  isShowLogin:false
+  isShowLogin:false,
+  transitionName:""
 }
 export default state
 

@@ -4,6 +4,9 @@ const action = {
   },
   closeLoginPopup({commit},payload){
     commit("controlLoginPopup",false)
+  },
+  changeTransitionName({commit},payload){
+    commit("changeTransitionName",payload)
   }
 }
 export default action

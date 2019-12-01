@@ -21,8 +21,8 @@
       <div>
         <div class="row">
           <p class="left">
-            <img class="avatar-img" src="./../../assets/images/touxiang.jpg" alt="">
-            <span class="user">请叫我张温柔</span>
+            <img class="avatar-img" :src="avatar" alt="">
+            <span class="user">{{nickname}}</span>
           </p>
 
           <p class="right">
@@ -58,7 +58,9 @@
         simple,
         title:"",
         images:"",
-        content:""
+        content:"",
+        nickname:"",
+        avatar:"",
       }
     },
     mounted() {
@@ -85,6 +87,8 @@
         this.title = res.data.title
         this.content = res.data.content
         this.images = res.data.images.split(";")
+        this.nickname = res.data.nickname
+        this.avatar = res.data.avatar
         console.log(this.images)
       })
 

@@ -4,8 +4,8 @@
     <div class="title">{{noteData.title}}</div>
     <ul>
       <li>
-        <img class="user-img" src="./../../assets/images/touxiang.jpg" alt="">
-        <span>{{noteData.user_nickname}}</span>
+        <img class="user-img" :src="noteData.avatar" alt="">
+        <span>{{noteData.nickname}}</span>
       </li>
       <li>
         <i class="iconfont icon-love"></i>
