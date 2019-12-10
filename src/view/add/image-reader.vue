@@ -57,7 +57,7 @@
       }
     },
     methods: {
-      // 将base64转换成file对象
+      // 将base64转换成file对象1
       dataURLtoFile (dataurl, filename = 'file') {
         let arr = dataurl.split(',')
         let mime = arr[0].match(/:(.*?);/)[1]
