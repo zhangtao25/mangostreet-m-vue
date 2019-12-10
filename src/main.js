@@ -13,7 +13,7 @@ import pikaqiu from './common/pikachu'
 import './assets/css/iconfont.css'
 
 
-// 路由守卫
+// 路由守卫1
 router.beforeEach((to, from, next) => {
   next();
 });
