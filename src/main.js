@@ -7,21 +7,12 @@ import mandMobile from 'mand-mobile'
 import 'mand-mobile/lib/mand-mobile.css'
 
 Vue.use(mandMobile)
-
-
-import pikaqiu from './common/pikachu'
 import './assets/css/iconfont.css'
-
 
 // 路由守卫1
 router.beforeEach((to, from, next) => {
   next();
 });
-
-
-// pikaqiu();
-// require('./mock');
-
 
 new Vue({
   router,
