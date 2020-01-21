@@ -1,37 +1,33 @@
 import Vue from 'vue'
-import Router from 'vue-router'
-import authRouterConfig from './auth.router.config'
-import settingRouterConfig from './setting.router.config'
+import VueRouter from 'vue-router'
+import Home from '../views/Home.vue'
+import Login from '../views/Login'
 
-Vue.use(Router);
+Vue.use(VueRouter)
 
-export default new Router({
-  routes: [
-    ...authRouterConfig,
-    {
-      path: '/home',
-      component: ()=>import('../view/home.vue')
-    },
-    {
-      path: '/note-detail/:id',
-      component: ()=>import('../view/home/note-detail.vue')
-    },
-    {
-      path: '/mall',
-      component: ()=>import('../view/mall.vue')
-    },
-    {
-      path: '/add',
-      component: ()=>import('../view/add.vue')
-    },
-    {
-      path: '/msg',
-      component: ()=>import('../view/msg.vue')
-    },
-    {
-      path: '/mine',
-      component: ()=>import('../view/mine.vue')
-    },
-    ...settingRouterConfig
-  ]
+const routes = [
+  {
+    path: '/',
+    name: 'home',
+    component: Home
+  },
+  {
+    path: '/login',
+    name: 'login',
+    component: Login
+  },
+  // {
+  //   path: '/about',
+  //   name: 'about',
+  //   // route level code-splitting
+  //   // this generates a separate chunk (about.[hash].js) for this route
+  //   // which is lazy-loaded when the route is visited.
+  //   component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
+  // }
+]
+
+const router = new VueRouter({
+  routes
 })
+
+export default router

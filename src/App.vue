@@ -1,94 +1,43 @@
 <template>
-  <div>
-<!--    <transition name="slide-in">-->
-<!--      -->
-<!--    </transition>-->
+  <div id="app">
+    <div id="nav">
+      <router-link to="/">Home</router-link> |
+      <router-link to="/about">About</router-link>
+    </div>
     <router-view/>
-    <app-tab-bar></app-tab-bar>
-<!--    <div id="container"></div>-->
   </div>
 </template>
-
 <script>
-  import AppTabBar from './layouts/app-tab-bar'
+  import {axios} from './utils/request'
+  import AuthService from './api/auth'
   export default {
-    components: {
-      [AppTabBar.name]: AppTabBar
-    },
-    data() {
-      return {
-      }
-    },
     mounted() {
+      AuthService.login().then(res=>{
+        console.log(res)
+      })
     }
   }
-
 </script>
+
 <style>
-  html,body,#container{
-    height:100vh;
-    width: 100%;
-  }
-</style>
+#app {
+  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: center;
+  color: #2c3e50;
+}
 
-<style lang="stylus">
-  @import '~mand-mobile/components/_style/global.styl'
-  html
-    font-size calc(10000vw / 750)
-  body
-    font-size 28px
-    color #333
-</style>
+#nav {
+  padding: 30px;
+}
 
-<style lang="scss">
-  .transition {
-    height: 100%;
-    transition: transform 0.7s cubic-bezier(0.55, 0, 0.1, 1);
-  }
-  .fixed {
-    position: fixed;
-    width: 100%;
-    top: 0;
-    overflow: hidden;
-  }
-  .slide-in-leave-to {
-    @extend .fixed;
-    transform: translate3d(-100%, 0, 0);
-  }
-  .slide-in-leave-active {
-    @extend .fixed;
-    @extend .transition;
-  }
-  .slide-in-enter {
-    @extend .fixed;
-    transform: translate3d(100%, 0, 0);
-  }
-  .slide-in-enter-active {
-    @extend .fixed;
-    @extend .transition;
-  }
-  .slide-in-enter-to {
-    @extend .fixed;
-    transform: translate3d(0, 0, 0);
-  }
+#nav a {
+  font-weight: bold;
+  color: #2c3e50;
+}
 
-  .slide-out-leave-to {
-    @extend .fixed;
-    transform: translate3d(100%, 0, 0);
-  }
-  .slide-out-leave-active {
-    @extend .transition;
-    @extend .fixed;
-  }
-  .slide-out-enter {
-    @extend .fixed;
-    transform: translate3d(-100%, 0, 0);
-  }
-  .slide-out-enter-active {
-    @extend .transition;
-    @extend .fixed;
-  }
-  .slide-out-enter-to {
-    transform: translate3d(0, 0, 0);
-  }
+#nav a.router-link-exact-active {
+  color: #42b983;
+}
 </style>
