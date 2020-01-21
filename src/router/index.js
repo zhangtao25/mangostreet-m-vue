@@ -5,5 +5,9 @@ Vue.use(Router);
 
 export default new Router({
   routes: [
+    {
+      path: '/test',
+      component: ()=>import('../view/test.vue')
+    },
   ]
 })

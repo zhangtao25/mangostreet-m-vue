@@ -1,12 +1,13 @@
 <template>
   <div>
     <router-view/>
-    <app-tab-bar></app-tab-bar>
+<!--    <app-tab-bar></app-tab-bar>-->
   </div>
 </template>
 
 <script>
   import AppTabBar from './layouts/app-tab-bar'
+  import axios from 'axios'
   export default {
     components: {
       [AppTabBar.name]: AppTabBar
@@ -16,6 +17,9 @@
       }
     },
     mounted() {
+      axios.get("http://localhost:8000/hello").then(res=>{
+        console.log(res)
+      })
     }
   }
 
