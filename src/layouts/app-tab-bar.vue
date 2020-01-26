@@ -4,7 +4,11 @@
       <li v-for="(item,index) of items" :key="index" :class="{actived:item.name === current}" @click="goTo(item.name)">
 <!--        <span v-if="item.name !== 3">{{item.label}}</span>-->
         <i class="icon-tab-bar" v-if="item.name !== 3"></i>
-        <img v-if="item.name === 3" class="add" src="./../assets/images/add.png" alt="">
+<!--        <img v-if="item.name === 3" class="add" src="./../assets/images/add.png" alt="">-->
+        <div v-if="item.name === 3" class="add">
+          <span></span>
+          <span></span>
+        </div>
       </li>
     </ul>
   </div>
@@ -62,17 +66,17 @@
     }
     li{
       color: #9d9d9d;
-      height: 85px;
+      height: 100px;
       width: 20%;
       display: flex;
       align-items: center;
       justify-content: center;
       i.icon-tab-bar{
-        width: 40px;
-        height: 40px;
+        width: 53.3px;
+        height: 53.3px;
         display: block;
         background-color: antiquewhite;
-        background-size: auto 80px;
+        background-size: auto 106.6px;
         background-image: url("./../assets/images/icon-tab-bar.png");
       }
     }
@@ -83,44 +87,80 @@
     }
     li:nth-child(2){
       i.icon-tab-bar{
-        background-position: -40px 0;
+        background-position: -53.3px 0;
       }
     }
 
     li:nth-child(4){
       i.icon-tab-bar{
-        background-position: -80px 0;
+        background-position: -106.6px 0;
       }
     }
     li:nth-child(5){
       i.icon-tab-bar{
-        background-position: -120px 0;
+        background-position: -160px 0;
       }
     }
 
+    li.actived{
+      transition-duration: 0.3s;
+      transition-timing-function: ease;
+      transform: scale(0.83);
+      i.icon-tab-bar{
+        transform: scale(1.2);
+      }
+    }
     li:nth-child(1).actived{
       i.icon-tab-bar{
-        background-position: 0 40px;
+        transform: scale(1.2);
+        background-position: 0 53.3px;
       }
     }
     li:nth-child(2).actived{
       i.icon-tab-bar{
-        background-position: -40px 40px;
+        background-position: -53.3px 53.3px;
       }
     }
     li:nth-child(4).actived{
       i.icon-tab-bar{
-        background-position: -80px 40px;
+        background-position: -106.6px 53.3px;
       }
     }
     li:nth-child(5).actived{
       i.icon-tab-bar{
-        background-position: -120px 40px;
+        background-position: -160px 53.3px;
       }
     }
+    li:nth-child(3).actived{
+      transition: none;
+      transform: scale(1);
+      i.icon-tab-bar{
+        transform: scale(1);
+      }
+    }
+    li:nth-child(3).actived .add{
+      width: 70px;
+      height: 70px;
+      transition: 0.2s;
+    }
     .add{
-      width: 92px;
+      width: 65px;
+      height: 65px;
+      border: 5px solid #333;
+      border-radius: 50%;
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      span{
+        position: absolute;
+        width: 30px;
+        height: 6px;
+        background-color: #333333;
+      }
+      span:nth-child(1){
+        transform: rotate(90deg);
+      }
     }
   }
-
 </style>
