@@ -4,7 +4,7 @@ import router from './router'
 import store from './store'
 
 import mandMobile from 'mand-mobile'
-import 'mand-mobile/lib/mand-mobile.css'
+import 'mand-mobile/lib-vw/mand-mobile.css'
 
 Vue.use(mandMobile)
 
